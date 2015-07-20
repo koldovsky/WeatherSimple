@@ -2,21 +2,21 @@ $(function(){
     getWeatherData('ua', dataReceived, showError);
 
     function dataReceived(data) {
-        var offset = (new Date()).getTimezoneOffset()*60*1000; // Відхилення від UTC  в мілісекундах
+        var offset = (new Date()).getTimezoneOffset()*60*1000; // Р’С–РґС…РёР»РµРЅРЅСЏ РІС–Рґ UTC  РІ РјС–Р»С–СЃРµРєСѓРЅРґР°С…
         var city = data.city.name;
         var country = data.city.country;
 
         $.each(data.list, function(){
-            // "this" тримає об'єкт прогнозу звідси: http://openweathermap.org/forecast16
-            var localTime = new Date(this.dt*1000 - offset); // конвертуємо час з UTC у локальний
+            // "this" С‚СЂРёРјР°С” РѕР±'С”РєС‚ РїСЂРѕРіРЅРѕР·Сѓ Р·РІС–РґСЃРё: http://openweathermap.org/forecast16
+            var localTime = new Date(this.dt*1000 - offset); // РєРѕРЅРІРµСЂС‚СѓС”РјРѕ С‡Р°СЃ Р· UTC Сѓ Р»РѕРєР°Р»СЊРЅРёР№
             addWeather(
                 this.weather[0].icon,
-                moment(localTime).calendar(),	// Використовуємо moment.js для представлення дати
+                moment(localTime).calendar(),	// Р’РёРєРѕСЂРёСЃС‚РѕРІСѓС”РјРѕ moment.js РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРЅСЏ РґР°С‚Рё
                 this.weather[0].description,
                 Math.round(this.temp.day) + '&deg;C'
             );
         });
-        $('#location').html(city + ', <b>' + country + '</b>'); // Додаємо локацію на сторінку
+        $('#location').html(city + ', <b>' + country + '</b>'); // Р”РѕРґР°С”РјРѕ Р»РѕРєР°С†С–СЋ РЅР° СЃС‚РѕСЂС–РЅРєСѓ
     }
 
     function addWeather(icon, day, condition, temp){
@@ -26,10 +26,10 @@ $(function(){
                 '<td>' + temp + '</td>' +
                 '<td>' + condition + '</td>'
             + '</tr>';
-        weatherTable.insertRow(-1).innerHTML = markup; // Додаємо рядок до таблиці
+        weatherTable.insertRow(-1).innerHTML = markup; // Р”РѕРґР°С”РјРѕ СЂСЏРґРѕРє РґРѕ С‚Р°Р±Р»РёС†С–
     }
 
     function showError(msg){
-        $('#error').html('Сталася помилка: ' + msg);
+        $('#error').html('РЎС‚Р°Р»Р°СЃСЏ РїРѕРјРёР»РєР°: ' + msg);
     }
 });
