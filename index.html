@@ -1,28 +1,28 @@
 <!doctype html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>Сайт прогнозу погоди</title>
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <title>Сайт прогнозу погоди</title>
+    </head>
 
-<body>
+    <body>
+        <header>
+            <h1>Найпростіший прогноз погоди</h1>
+        </header>
 
-    <header>
-        <h1>Найпростіший прогноз погоди</h1>
-    </header>
+        <p>Місто: <span id="location" ></span></p>
 
-    <p>Місто: <span id="location" ></span></p>
+        <table id="weatherTable">
+            <tr>
+                <th>Коли</th><th>Небо</th><th>Температура</th><th>Стан</th>
+            </tr>
+        </table>
 
-    <table id="weatherTable">
-        <tr>
-            <th>Коли</th><th>Небо</th><th>Температура</th><th>Стан</th>
-        </tr>
-    </table>
+        <p id="error"></p>
 
-    <!-- JavaScript includes - jQuery, moment.js and our own script.js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
-    <script src="scripts/weatherService.js"></script>
-    <script src="scripts/script.js"></script>
-</body>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
+        <script src="scripts/weatherService.js"></script>
+        <script src="scripts/script.js"></script>
+    </body>
 </html>

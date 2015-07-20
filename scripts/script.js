@@ -2,24 +2,21 @@ $(function(){
     getWeatherData('ua', dataReceived, showError);
 
     function dataReceived(data) {
-        // Get the offset from UTC (turn the offset minutes into ms)
-        var offset = (new Date()).getTimezoneOffset()*60*1000;
+        var offset = (new Date()).getTimezoneOffset()*60*1000; // Відхилення від UTC  в мілісекундах
         var city = data.city.name;
         var country = data.city.country;
 
         $.each(data.list, function(){
-            // "this" holds a forecast object
-            // Get the local time of this forecast (the api returns it in utc)
-            var localTime = new Date(this.dt*1000 - offset);
+            // "this" тримає об'єкт прогнозу звідси: http://openweathermap.org/forecast16
+            var localTime = new Date(this.dt*1000 - offset); // конвертуємо час з UTC у локальний
             addWeather(
                 this.weather[0].icon,
-                moment(localTime).calendar(),	// We are using the moment.js library to format the date
+                moment(localTime).calendar(),	// Використовуємо moment.js для представлення дати
                 this.weather[0].description,
                 Math.round(this.temp.day) + '&deg;C'
             );
         });
-        // Add the location to the page
-        $('#location').html(city + ', <b>' + country + '</b>');
+        $('#location').html(city + ', <b>' + country + '</b>'); // Додаємо локацію на сторінку
     }
 
     function addWeather(icon, day, condition, temp){
@@ -29,11 +26,10 @@ $(function(){
                 '<td>' + temp + '</td>' +
                 '<td>' + condition + '</td>'
             + '</tr>';
-        weatherTable.insertRow(-1).innerHTML = markup;
+        weatherTable.insertRow(-1).innerHTML = markup; // Додаємо рядок до таблиці
     }
 
-    /* Error handling functions */
     function showError(msg){
-        weatherDiv.addClass('error').html(msg);
+        $('#error').html('Сталася помилка: ' + msg);
     }
 });
