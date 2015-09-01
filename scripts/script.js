@@ -1,5 +1,6 @@
 $(function(){
-    getWeatherData('ua', dataReceived, showError);
+    //getWeatherData('ua', dataReceived, showError);
+    getWeatherByCity('ua', dataReceived, showError, 'Lviv');
 
     function dataReceived(data) {
         var offset = (new Date()).getTimezoneOffset()*60*1000; // Відхилення від UTC  в мілісекундах
