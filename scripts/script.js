@@ -2,6 +2,13 @@ $(function(){
     $('#btnGetWeather').click(function () {
         getWeatherByCity('ua', dataReceived, showError, $('#inputCityName').val());
     });
+    $('#inputCityName').keypress(function(e){
+        if ( e.which == 13 ) // Enter key = keycode 13
+        {
+            $('#btnGetWeather').trigger('click');  //Use whatever selector necessary to focus the 'next' input
+            return false;
+        }
+    });    
     
     getWeatherData('ua', dataReceived, showError);
     
@@ -29,7 +36,7 @@ $(function(){
         var markup = '<tr>'+
                 '<td>' + day + '</td>' +
                 '<td>' + '<img src="images/icons/'+ 
-                  ( (icon === '10ddd')? '10d' : icon) // Fix in case if server returns unknown icon 10ddd 
+                  icon
                   +'.png" />' + '</td>' +
                 '<td>' + temp + '</td>' +
                 '<td>' + condition + '</td>'
