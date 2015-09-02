@@ -1,11 +1,16 @@
 $(function(){
-    //getWeatherData('ua', dataReceived, showError);
-    getWeatherByCity('ua', dataReceived, showError, 'Lviv');
+    $('#btnGetWeather').click(function () {
+        getWeatherByCity('ua', dataReceived, showError, $('#inputCityName').val());
+    });
+    
+    getWeatherData('ua', dataReceived, showError);
+    
 
     function dataReceived(data) {
         var offset = (new Date()).getTimezoneOffset()*60*1000; // Відхилення від UTC  в мілісекундах
         var city = data.city.name;
         var country = data.city.country;
+        $("#weatherTable tr:not(:first)").remove();
 
         $.each(data.list, function(){
             // "this" тримає об'єкт прогнозу звідси: http://openweathermap.org/forecast16
@@ -23,7 +28,9 @@ $(function(){
     function addWeather(icon, day, condition, temp){
         var markup = '<tr>'+
                 '<td>' + day + '</td>' +
-                '<td>' + '<img src="images/icons/'+ icon +'.png" />' + '</td>' +
+                '<td>' + '<img src="images/icons/'+ 
+                  ( (icon === '10ddd')? '10d' : icon) // Fix in case if server returns unknown icon 10ddd 
+                  +'.png" />' + '</td>' +
                 '<td>' + temp + '</td>' +
                 '<td>' + condition + '</td>'
             + '</tr>';
