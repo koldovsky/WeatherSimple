@@ -2,10 +2,11 @@ $(function(){
     $('#btnGetWeather').click(function () {
         getWeatherByCity('ua', dataReceived, showError, $('#inputCityName').val());
     });
-    $('#inputCityName').keypress(function(e){
-        if ( e.which == 13 ) // Enter key = keycode 13
+    $('#inputCityName').keypress(function(e) {
+        var ENTER_KEY_CODE = 13;
+        if ( e.which === ENTER_KEY_CODE ) 
         {
-            $('#btnGetWeather').trigger('click');  //Use whatever selector necessary to focus the 'next' input
+            $('#btnGetWeather').trigger('click');
             return false;
         }
     });    
@@ -14,7 +15,7 @@ $(function(){
     
 
     function dataReceived(data) {
-        var offset = (new Date()).getTimezoneOffset()*60*1000; // Відхилення від UTC  в мілісекундах
+        var offset = (new Date()).getTimezoneOffset()*60*1000; // Відхилення від UTC в секундах
         var city = data.city.name;
         var country = data.city.country;
         $("#weatherTable tr:not(:first)").remove();
